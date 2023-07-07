@@ -14,4 +14,14 @@ datasource db {
 model Track {
   id  Int @id @default(autoincrement())
   title String @db.VarChar(255)
+  artistId Int?
+  artist Artist? @relation(fields: [artistId], references: [id])
+
+  @@index([artistId])
+}
+
+model Artist {
+  id  Int @id @default(autoincrement())
+  name String @db.VarChar(255)
+  tracks Track[]
 }
